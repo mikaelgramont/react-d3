@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="830627a0-99c2-49ad-b68e-2c8f3480b1d5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/mika.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/styles.css" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../react-kicker/components/Slider.jsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../react-kicker/pages/_app.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../react-kicker/styles/global.css" afterDir="false" />
@@ -57,6 +59,10 @@
       <change beforePath="$PROJECT_DIR$/../../custom/custom.scss" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../doc/architecture/decisions/0001-record-architecture-decisions.md" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../doc/architecture/decisions/0002-project-structure.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../extract.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../fragmentTypes.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../graphql.config.json" beforeDir="false" />
@@ -349,7 +355,7 @@
     </execution>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1bnd1ssCTncCBKRwBqhCdsPt6VP" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -360,8 +366,13 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="yarn" />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
