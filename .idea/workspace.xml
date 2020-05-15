@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="830627a0-99c2-49ad-b68e-2c8f3480b1d5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/pages/module1.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/module2.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/Table.jsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../react-kicker/components/Slider.jsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../react-kicker/pages/_app.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../react-kicker/styles/global.css" afterDir="false" />
@@ -60,7 +59,8 @@
       <change beforePath="$PROJECT_DIR$/../../doc/architecture/decisions/0001-record-architecture-decisions.md" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../doc/architecture/decisions/0002-project-structure.md" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/module1.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/module1.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/module2.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/module2.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../extract.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../fragmentTypes.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../graphql.config.json" beforeDir="false" />
@@ -395,5 +395,13 @@
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
     <state x="1372" y="334" key="CommitChangelistDialog2/0.23.2560.1417@0.23.2560.1417" timestamp="1589462732673" />
+    <state x="1599" y="564" key="com.intellij.ide.util.TipDialog" timestamp="1589523706304">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state x="1599" y="564" key="com.intellij.ide.util.TipDialog/0.23.2560.1417@0.23.2560.1417" timestamp="1589523706304" />
+    <state x="1585" y="348" width="670" height="676" key="search.everywhere.popup" timestamp="1589524444414">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state x="1585" y="348" width="670" height="676" key="search.everywhere.popup/0.23.2560.1417@0.23.2560.1417" timestamp="1589524444414" />
   </component>
 </project>

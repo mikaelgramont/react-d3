@@ -1,7 +1,9 @@
 import Head from 'next/head';
-import { useRef, useEffect, useState } from 'react';
+import {useRef, useEffect, useState, Fragment} from 'react';
 import * as d3 from 'd3';
 import Link from 'next/link'
+
+import Table from '../components/Table';
 
 const initialData = [
   {
@@ -39,9 +41,11 @@ const height = 300;
 const margin = {top: 20, bottom: 20, left: 20, right: 20};
 
 export default function Module2() {
-  const h = 400;
   const vis = useRef();
+  const dateInput = useRef();
+  const valueInput = useRef();
   const [ data, setData ] = useState(initialData);
+
   useEffect(() => {
     const svg = d3.select(vis.current);
 
@@ -56,10 +60,6 @@ export default function Module2() {
     const yScale = d3.scaleLinear()
       .domain(yExtent)
       .range([height - margin.bottom, margin.top]);
-
-    const heightScale = d3.scaleLinear()
-      .domain(yExtent)
-      .range([0, height - margin.top - margin.bottom]);
 
     const line = d3.line()
       .x(d => xScale(d.date))
@@ -77,12 +77,24 @@ export default function Module2() {
 
   }, [data]);
 
+  const onAdd = () => {
+    const newData = data.slice();
+    const dateValues = dateInput.current.value.split('/');
+    newData.push({
+      date: new Date(dateValues[0], dateValues[1], dateValues[2]),
+      value: valueInput.current.value,
+    })
+    setData(newData);
+
+    dateInput.current.value = '';
+    valueInput.current.value = '';
+  };
+
   return (
     <div className="container">
       <Head>
         <title>D3 explorations - module 2</title>
         <link rel="icon" href="/favicon.ico" />
-
       </Head>
 
       <main>
@@ -90,6 +102,7 @@ export default function Module2() {
           <a>Back to home</a>
         </Link>
         <svg ref={vis}></svg>
+        <Table data={data} dateInput={dateInput} valueInput={valueInput} onAdd={onAdd} />
       </main>
 
       <style jsx global>{`

@@ -3,32 +3,21 @@ import { useRef, useEffect, useState } from 'react';
 import * as d3 from 'd3';
 import Link from 'next/link'
 
-const parse = d3.timeParse("%Y%m%d");
-const initialBooks = [
+import Table from '../components/Table';
+
+const initialData = [
   {
-    date: parse("20111001"),
-    name: "Harry Potter and the Philosophers Stone",
-    author: "J. K. Rowling",
-    genre: "fantasy",
-    price: 12,
+    date: new Date(2011, 10 ,1),
+    value: 12,
   }, {
-    date: parse("20121002"),
-    name: "The Pedagogy of Freedom",
-    author: "Bell hooks",
-    genre: "non-fiction",
-    price: 5,
+    date: new Date(2012, 10 ,2),
+    value: 5,
   }, {
-    date: parse("20120703"),
-    name: "Harry Potter and the Chamber of Secrets",
-    author: "J. K. Rowling",
-    genre: "fantasy",
-    price: 6,
+    date: new Date(2012, 7 ,3),
+    value: 6,
   }, {
-    date: parse("20120304"),
-    name: "Gilgamesh",
-    author: "Derrek Hines",
-    genre: "poetry",
-    price: 9,
+    date: new Date(2012, 3 ,4),
+    value: 9,
   },
 ];
 
@@ -39,15 +28,16 @@ const margin = {top: 20, bottom: 20, left: 20, right: 20};
 export default function Module1() {
   const h = 400;
   const vis = useRef();
-  const [ books, setBooks ] = useState(initialBooks);
-  useEffect(() => {
-    const data = books;
+  const dateInput = useRef();
+  const valueInput = useRef();
 
+  const [ data, setData ] = useState(initialData);
+  useEffect(() => {
     const svg = d3.select(vis.current);
 
     // scales
     const xExtent = d3.extent(data, d => d.date);
-    const yExtent = [0, d3.max(data, d => d.price)];
+    const yExtent = [0, d3.max(data, d => d.value)];
 
     const xScale = d3.scaleTime()
       .domain(xExtent)
@@ -69,8 +59,8 @@ export default function Module1() {
       .append('rect')
       .attr('x', (d) => xScale(d.date) )
       .attr('width', barWidth)
-      .attr('y', d => yScale(d.price))
-      .attr('height', d => heightScale(d.price))
+      .attr('y', d => yScale(d.value))
+      .attr('height', d => heightScale(d.value))
       .attr('fill', 'blue');
 
     // add the axes
@@ -80,7 +70,20 @@ export default function Module1() {
     const yAxis = d3.axisLeft().scale(yScale);
     svg.append('g').call(yAxis).attr('transform', `translate(${margin.left}, 0)`);
 
-  }, [books]);
+  }, [data]);
+
+  const onAdd = () => {
+    const newData = data.slice();
+    const dateValues = dateInput.current.value.split('/');
+    newData.push({
+      date: new Date(dateValues[0], dateValues[1], dateValues[2]),
+      value: valueInput.current.value,
+    })
+    setData(newData);
+
+    dateInput.current.value = '';
+    valueInput.current.value = '';
+  };
 
   return (
     <div className="container">
@@ -95,6 +98,7 @@ export default function Module1() {
           <a>Back to home</a>
         </Link>
         <svg ref={vis}></svg>
+        <Table data={data} dateInput={dateInput} valueInput={valueInput} onAdd={onAdd} />
       </main>
 
       <style jsx global>{`
