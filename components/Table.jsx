@@ -1,4 +1,21 @@
-const Table = ({ data, dateInput, valueInput, onAdd }) => {
+const Table = ({ data, dateInput, valueInput, setData }) => {
+  const onAdd = () => {
+    const newData = data.slice();
+    const dateValues = dateInput.current.value.split('/');
+    newData.push({
+      date: new Date(
+        parseInt(dateValues[0], 10),
+        parseInt(dateValues[1], 10),
+        parseInt(dateValues[2], 10),
+      ),
+      value: valueInput.current.value,
+    })
+    setData(newData);
+
+    dateInput.current.value = '';
+    valueInput.current.value = '';
+  };
+
   return (
     <table>
       <thead>

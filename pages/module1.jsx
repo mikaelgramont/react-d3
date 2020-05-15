@@ -72,19 +72,6 @@ export default function Module1() {
 
   }, [data]);
 
-  const onAdd = () => {
-    const newData = data.slice();
-    const dateValues = dateInput.current.value.split('/');
-    newData.push({
-      date: new Date(dateValues[0], dateValues[1], dateValues[2]),
-      value: valueInput.current.value,
-    })
-    setData(newData);
-
-    dateInput.current.value = '';
-    valueInput.current.value = '';
-  };
-
   return (
     <div className="container">
       <Head>
@@ -98,7 +85,7 @@ export default function Module1() {
           <a>Back to home</a>
         </Link>
         <svg ref={vis}></svg>
-        <Table data={data} dateInput={dateInput} valueInput={valueInput} onAdd={onAdd} />
+        <Table data={data} dateInput={dateInput} valueInput={valueInput} setData={setData} />
       </main>
 
       <style jsx global>{`

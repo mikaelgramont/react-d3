@@ -102,7 +102,7 @@ export default function Module2() {
           <a>Back to home</a>
         </Link>
         <svg ref={vis}></svg>
-        <Table data={data} dateInput={dateInput} valueInput={valueInput} onAdd={onAdd} />
+        <Table data={data} dateInput={dateInput} valueInput={valueInput} setData={setData} />
       </main>
 
       <style jsx global>{`
