@@ -16,6 +16,11 @@ const Table = ({ data, dateInput, valueInput, setData }) => {
     valueInput.current.value = '';
   };
 
+  const onRemove = (dateToBeRemoved) => {
+    const newData = data.slice().filter(({ date }) => (date !== dateToBeRemoved));
+    setData(newData);
+  };
+
   return (
     <table>
       <thead>
@@ -28,11 +33,11 @@ const Table = ({ data, dateInput, valueInput, setData }) => {
         <tr key={index}>
           <td>{date.toISOString()}</td>
           <td>{value}</td>
-          <td><button>Remove</button></td>
+          <td><button onClick={() => {onRemove(date)}}>Remove</button></td>
         </tr>
       ))}
       <tr>
-        <td><label>Date: <input ref={dateInput} id="dateInput" placeholder="YYYY/MM/DD"/></label></td>
+        <td><label>Date: <input ref={dateInput} id="dateInput" placeholder="YYYY-MM-DD"/></label></td>
         <td><label>Value: <input ref={valueInput} id="valueInput" type="number"/></label></td>
         <td><button id="add" onClick={onAdd}>Add</button></td>
       </tr>

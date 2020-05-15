@@ -7,31 +7,31 @@ import Table from '../components/Table';
 
 const initialData = [
   {
-    date: new Date(2007, 3 ,24),
+    date: new Date('2007-03-24'),
     value: 1,
   }, {
-    date: new Date(2007, 3 ,25),
+    date: new Date('2007-03-25'),
     value: 2,
   }, {
-    date: new Date(2007, 3 ,26),
+    date: new Date('2007-03-26'),
     value: 4,
   }, {
-    date: new Date(2007, 3 ,27),
+    date: new Date('2007-03-27'),
     value: 6,
   }, {
-    date: new Date(2007, 3 ,28),
+    date: new Date('2007-03-28'),
     value: 5,
   }, {
-    date: new Date(2007, 3 ,29),
+    date: new Date('2007-03-29'),
     value: 6,
   }, {
-    date: new Date(2007, 3 ,30),
+    date: new Date('2007-03-30'),
     value: 3,
   }, {
-    date: new Date(2007, 4 ,1),
+    date: new Date('2007-03-31'),
     value: 4,
   }, {
-    date: new Date(2007, 4 ,2),
+    date: new Date('2007-04-01'),
     value: 7,
   },
 ];

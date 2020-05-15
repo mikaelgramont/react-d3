@@ -7,16 +7,16 @@ import Table from '../components/Table';
 
 const initialData = [
   {
-    date: new Date(2011, 10 ,1),
+    date: new Date('2011-10-01'),
     value: 12,
   }, {
-    date: new Date(2012, 10 ,2),
+    date: new Date('2012-03-02'),
     value: 5,
   }, {
-    date: new Date(2012, 7 ,3),
+    date: new Date('2012-07-03'),
     value: 6,
   }, {
-    date: new Date(2012, 3 ,4),
+    date: new Date('2012-10-04'),
     value: 9,
   },
 ];
@@ -51,17 +51,23 @@ export default function Module1() {
       .domain(yExtent)
       .range([0, height - margin.top - margin.bottom]);
 
+    // Default transition
+    const t = svg.transition().duration(750);
+
     // create the rectangles
     const barWidth = 2;
     svg.selectAll('rect')
-      .data(data)
-      .enter()
-      .append('rect')
+      .data(data, d => d.date.toISOString())
+      .join(
+        enter => enter.append('rect')
+          .attr('width', barWidth)
+          .attr('fill', 'blue'),
+        update => update,
+        exit => exit.call(bar => bar.transition(t).remove().attr('y', yScale(0))),
+      )
       .attr('x', (d) => xScale(d.date) )
-      .attr('width', barWidth)
       .attr('y', d => yScale(d.value))
-      .attr('height', d => heightScale(d.value))
-      .attr('fill', 'blue');
+      .attr('height', d => heightScale(d.value));
 
     // add the axes
     const xAxis = d3.axisBottom().scale(xScale)
