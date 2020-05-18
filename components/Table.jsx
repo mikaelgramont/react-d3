@@ -1,7 +1,7 @@
 const Table = ({ data, dateInput, valueInput, setData }) => {
   const onAdd = () => {
     const newData = data.slice();
-    const dateValues = dateInput.current.value.split('/');
+    const dateValues = dateInput.current.value.split('-');
     newData.push({
       date: new Date(
         parseInt(dateValues[0], 10),
@@ -24,9 +24,11 @@ const Table = ({ data, dateInput, valueInput, setData }) => {
   return (
     <table>
       <thead>
-      <td>Date</td>
-      <td>Value</td>
-      <td>Remove</td>
+        <tr>
+          <th>Date</th>
+          <th>Value</th>
+          <th>Remove</th>
+        </tr>
       </thead>
       <tbody>
       {data.map(({date, value}, index) => (

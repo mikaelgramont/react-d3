@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import { useRef, useEffect, useState } from 'react';
-import * as d3 from 'd3';
 import Link from 'next/link'
 
+import Module1Chart from '../components/Module1Chart';
 import Table from '../components/Table';
 
 const initialData = [
@@ -21,60 +21,12 @@ const initialData = [
   },
 ];
 
-const width = 800;
-const height = 300;
-const margin = {top: 20, bottom: 20, left: 20, right: 20};
-
 export default function Module1() {
-  const h = 400;
-  const vis = useRef();
   const dateInput = useRef();
   const valueInput = useRef();
 
   const [ data, setData ] = useState(initialData);
   useEffect(() => {
-    const svg = d3.select(vis.current);
-
-    // scales
-    const xExtent = d3.extent(data, d => d.date);
-    const yExtent = [0, d3.max(data, d => d.value)];
-
-    const xScale = d3.scaleTime()
-      .domain(xExtent)
-      .range([margin.left, width - margin.right]);
-
-    const yScale = d3.scaleLinear()
-      .domain(yExtent)
-      .range([height - margin.bottom, margin.top]);
-
-    const heightScale = d3.scaleLinear()
-      .domain(yExtent)
-      .range([0, height - margin.top - margin.bottom]);
-
-    // Default transition
-    const t = svg.transition().duration(750);
-
-    // create the rectangles
-    const barWidth = 2;
-    svg.selectAll('rect')
-      .data(data, d => d.date.toISOString())
-      .join(
-        enter => enter.append('rect')
-          .attr('width', barWidth)
-          .attr('fill', 'blue'),
-        update => update,
-        exit => exit.call(bar => bar.transition(t).remove().attr('y', yScale(0))),
-      )
-      .attr('x', (d) => xScale(d.date) )
-      .attr('y', d => yScale(d.value))
-      .attr('height', d => heightScale(d.value));
-
-    // add the axes
-    const xAxis = d3.axisBottom().scale(xScale)
-    svg.append('g').call(xAxis).attr('transform', `translate(0, ${height - margin.bottom})`);
-
-    const yAxis = d3.axisLeft().scale(yScale);
-    svg.append('g').call(yAxis).attr('transform', `translate(${margin.left}, 0)`);
 
   }, [data]);
 
@@ -90,7 +42,8 @@ export default function Module1() {
         <Link href="/">
           <a>Back to home</a>
         </Link>
-        <svg ref={vis}></svg>
+
+        <Module1Chart data={data} />
         <Table data={data} dateInput={dateInput} valueInput={valueInput} setData={setData} />
       </main>
 
