@@ -28,6 +28,13 @@ export default function Home() {
             &nbsp;
             <span>[shapes: line]</span>
           </li>
+          <li>
+            <Link href="/module3">
+              <a>Module 3</a>
+            </Link>
+            &nbsp;
+            <span>Surfing Dirt history</span>
+          </li>
         </ul>
       </main>
 

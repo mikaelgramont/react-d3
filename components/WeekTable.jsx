@@ -1,4 +1,4 @@
-const Table = ({ data, dateInput, valueInput, setData }) => {
+const WeekTable = ({ data, dateInput, valueInput, setData }) => {
   const onAdd = () => {
     const newData = data.slice();
     const dateValues = dateInput.current.value.split('-');
@@ -16,8 +16,8 @@ const Table = ({ data, dateInput, valueInput, setData }) => {
     valueInput.current.value = '';
   };
 
-  const onRemove = (dateToBeRemoved) => {
-    const newData = data.slice().filter(({ date }) => (date !== dateToBeRemoved));
+  const onRemove = (weekToBeRemoved) => {
+    const newData = data.slice().filter(({ week }) => (week !== weekToBeRemoved));
     setData(newData);
   };
 
@@ -25,17 +25,17 @@ const Table = ({ data, dateInput, valueInput, setData }) => {
     <table>
       <thead>
         <tr>
-          <th>Date</th>
-          <th>Value</th>
+          <th>Week</th>
+          <th>Count</th>
           <th>Remove</th>
         </tr>
       </thead>
       <tbody>
-      {data.map(({date, value}, index) => (
+      {data.map(({week, posts}, index) => (
         <tr key={index}>
-          <td>{date.toISOString()}</td>
-          <td>{value}</td>
-          <td><button onClick={() => {onRemove(date)}}>Remove</button></td>
+          <td>{week}</td>
+          <td>{posts}</td>
+          <td><button onClick={() => {onRemove(week)}}>Remove</button></td>
         </tr>
       ))}
       {dateInput && valueInput && (
@@ -50,4 +50,4 @@ const Table = ({ data, dateInput, valueInput, setData }) => {
   );
 };
 
-export default Table;
+export default WeekTable;

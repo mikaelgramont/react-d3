@@ -44,7 +44,9 @@ const Module1Chart = ({ vis, data }) => {
     // svg.append('g').call(yAxis).attr('transform', `translate(${margin.left}, 0)`);
     d3.select(yAxisRef.current).call(yAxis);
 
-    // This kind of works, but axis are not rendered on the server
+    // This kind of works, but axis are not rendered on the server.
+    // The reason is that d3 actually builds DOM elements when calling d3.select(yAxisRef.current).call(yAxis);
+    // And that's not compatible with the JSX here
     setOutput(
       <svg width={width} height={height}>
         {data.map(( {date, value} ) => (
