@@ -14,7 +14,7 @@ const initialData = postsPerWeek; //.slice(0,5);
 
 const width = 800;
 const height = 400;
-const margin = {top: 20, bottom: 150, left: 20, right: 20};
+const margin = {top: 20, bottom: 150, left: 80, right: 70};
 
 const xMax = width - margin.left - margin.right;
 const yMax = height - margin.top - margin.bottom;
@@ -56,7 +56,7 @@ export default function Module3() {
 
   const xPoint = d => {
     const xValue = xScale(x(d));
-    console.log({x: x(d), xValue});
+    // console.log({x: x(d), xValue});
     return xValue;
   };
   const yPoint = data => yScale(y(data));
@@ -96,7 +96,7 @@ export default function Module3() {
               scale={yScale}
               hideZero
               numTicks={numTicksForHeight(height)}
-              label="Axis Left Label"
+              label="New posts per week"
               labelProps={{
                 fill: '#8e205f',
                 textAnchor: 'middle',

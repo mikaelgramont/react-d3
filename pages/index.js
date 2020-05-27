@@ -33,6 +33,13 @@ export default function Home() {
               <a>Module 3</a>
             </Link>
             &nbsp;
+            <span>One graph</span>
+          </li>
+          <li>
+            <Link href="/surfingdirt">
+              <a>Surfing Dirt</a>
+            </Link>
+            &nbsp;
             <span>Surfing Dirt history</span>
           </li>
         </ul>
