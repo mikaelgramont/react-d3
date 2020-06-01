@@ -4,7 +4,10 @@ import * as d3 from 'd3';
 import { AxisLeft, AxisBottom } from '@vx/axis'
 import { Group } from '@vx/group';
 import { Bar, Line } from '@vx/shape';
-import { scaleLinear, scaleBand, scaleTime } from '@vx/scale';
+import { scaleLog, scaleLinear, scaleBand, scaleTime } from '@vx/scale';
+
+const AVATAR_SIZE = 64;
+const barWidth = 20;
 
 function numTicksForHeight(height) {
   if (height <= 300) return 3;
@@ -18,29 +21,24 @@ function numTicksForWidth(width) {
   return 10;
 }
 
-const PostsPer = ({ width, height, margin, data, dataKey, label, barClass }) => {
-  const xMax = width - margin.left - margin.right;
+const PostsPerUser = ({ width, height, margin, data, label, classes }) => {
   const yMax = height - margin.top - margin.bottom;
 
   // X and Y
-  const x = ({ week }) => {
-    const [y, w] = week.split('-');
-    const d = (1 + (w - 1) * 7);
-    const xValue = new Date(y, 0, d);
-    return xValue;
-  };
-  const y = d => d[dataKey];
+  const x = ({ username }) => username;
+  const y = (d) => {
+    return d.posts;
+  }
 
   // Domain, range and scales
-  const domain = [x(data[0]), x(data[data.length - 1])];
-  const range = [0, xMax];
-  const xScale = scaleTime({
-    domain,
-    range,
-    padding: 0.4,
+  const xScale = scaleBand({
+    range: [0, width],
+    domain: data.map(({ username }) => username),
+    padding: 1
   });
+
   const yScale = scaleLinear({
-    rangeRound: [yMax, 0],
+    range: [yMax, 0],
     domain: [0, Math.max(...data.map(y))],
   });
 
@@ -48,21 +46,32 @@ const PostsPer = ({ width, height, margin, data, dataKey, label, barClass }) => 
     const xValue = xScale(x(d));
     return xValue;
   };
-  const yPoint = data => yScale(y(data));
+  const yPoint = d => {
+    const yValue = yMax - yScale(y(d));
+    return yValue;
+  };
+
+  const barColor = ({ posts }) => {
+    if (posts > 10000) return classes[0];
+    if (posts > 2000) return classes[1];
+    return classes[2];
+  };
 
   return (
     <svg width={width} height={height}>
       <Group>
         {data.map((d, i) => {
-          const barHeight = yMax - yPoint(d);
+          const y = yPoint(d);
+          const barHeight = y;
+          // console.log({ yMax, barHeight, y, yPoint: yPoint(d) });
           return (
             <Group key={`bar-${i}`}>
               <Bar
-                x={xPoint(d) + margin.left}
-                y={yMax - barHeight}
+                x={xPoint(d) + margin.left - barWidth / 2}
+                y={margin.top + yMax - barHeight}
                 height={barHeight}
-                width={1}
-                className={barClass}
+                width={barWidth}
+                className={barColor(d)}
               />
             </Group>
           );
@@ -73,10 +82,10 @@ const PostsPer = ({ width, height, margin, data, dataKey, label, barClass }) => 
           top={margin.top}
           left={0}
           scale={yScale}
-          hideZero
           numTicks={numTicksForHeight(height)}
           label={label}
           labelProps={{
+            fill: '#8e205f',
             textAnchor: 'middle',
             fontSize: 12,
             fontFamily: 'Arial'
@@ -84,6 +93,7 @@ const PostsPer = ({ width, height, margin, data, dataKey, label, barClass }) => 
           stroke="#1b1a1e"
           tickStroke="#8e205f"
           tickLabelProps={(value, index) => ({
+            fill: '#8e205f',
             textAnchor: 'end',
             fontSize: 10,
             fontFamily: 'Arial',
@@ -96,16 +106,13 @@ const PostsPer = ({ width, height, margin, data, dataKey, label, barClass }) => 
         />
       </Group>
       <AxisBottom
-        top={height - margin.bottom -20}
+        top={margin.top + height - margin.bottom -20}
         left={margin.left}
         scale={xScale}
-        numTicks={numTicksForWidth(width)}
-        label="Year"
       >
         {axis => {
-          //console.log('ticks', axis.ticks);
           const tickLabelSize = 10;
-          const tickRotate = 90;
+          const tickRotate = 45;
           const tickColor = '#8e205f';
           const axisCenter = (axis.axisToPoint.x - axis.axisFromPoint.x) / 2;
           return (
@@ -115,18 +122,19 @@ const PostsPer = ({ width, height, margin, data, dataKey, label, barClass }) => 
                 const tickY = tick.to.y + tickLabelSize + axis.tickLength;
                 return (
                   <Group key={`vx-tick-${tick.value}-${i}`} className={'vx-axis-tick'}>
-                    <Line from={tick.from} to={tick.to} />
+                    <Line from={tick.from} to={tick.to} stroke={tickColor} />
                     <text
                       transform={`translate(${tickX}, ${tickY}) rotate(${tickRotate})`}
                       fontSize={tickLabelSize}
-                      textAnchor="middle"
+                      textAnchor="left"
+                      fill={tickColor}
                     >
                       {tick.formattedValue}
                     </text>
                   </Group>
                 );
               })}
-              <text textAnchor="middle" transform={`translate(${axisCenter}, 70)`} fontSize="16">
+              <text textAnchor="middle" transform={`translate(${axisCenter}, 80)`} fontSize="16">
                 {axis.label}
               </text>
               <Line from={axis.axisFromPoint} to={axis.axisToPoint} stroke={tickColor}></Line>
@@ -138,4 +146,4 @@ const PostsPer = ({ width, height, margin, data, dataKey, label, barClass }) => 
   );
 };
 
-export default PostsPer;
+export default PostsPerUser;
